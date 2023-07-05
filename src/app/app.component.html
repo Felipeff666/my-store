@@ -1,3 +1,93 @@
+<h1>ngSwitch</h1>
+<input type="text" required [(ngModel)]="persona.name">
+
+<div [ngSwitch]="persona.name">
+  <p *ngSwitchCase="'Nicolas'">
+    La persona es Nicolas
+  </p>
+  <p *ngSwitchCase="'Felipe'">
+    La persona es Felipe
+  </p>
+  <p *ngSwitchCase="'Jhon'">
+    La persona es Jhon
+  </p>
+  <p *ngSwitchDefault>No hace match con ninguno</p>
+</div>
+
+
+<hr>
+<!-- ------------------------------------------------------------------------------------------ -->
+  <h1>ngFor Array objects</h1>
+<div>
+  <div *ngFor="let product of products">
+    <img width="200px" [src]="product.image" alt="image">
+    <h2>Precio: $ {{product.price}}</h2>
+    <p>{{product.name}}</p>
+  </div>
+</div>
+
+<hr>
+<!-- ------------------------------------------------------------------------------------------ -->
+<h1>ngFor</h1>
+
+<input type="text" [(ngModel)]="newName"  >
+<button (click)="agregarNombre()">Agregar nombre</button>
+<ul >
+  <li *ngIf="nombres.length == 0">No hay nombres agrega uno</li>
+  <li *ngFor=" let item of nombres ; index as i">
+    {{i}}  {{item}}
+    <button (click)="eliminarNombre(i)">Eliminar</button>
+  </li>
+</ul>
+<hr>
+<!-- ------------------------------------------------------------------------------------------
+ --><h1>ngIF</h1>
+<input type="text" [(ngModel)]="persona.name">
+
+<!-- validacion if por true -->
+<p *ngIf=" persona.name == 'Alberto'" >My content Julian</p>
+
+<!-- validacion if con operadores logicos -->
+<p *ngIf=" persona.name == 'Felipe' && persona.age==50" >My content Felipe</p>
+
+<!-- validacion if- else usando ng-template -->
+<p *ngIf=" persona.name == 'Felipe' && persona.age==50; else elseBlock" >My content Felipe</p>
+<ng-template #elseBlock>
+  <p>Nombre incorrecto Bloque else</p>
+</ng-template>
+
+
+<hr>
+<!-- ------------------------------------------------------------------------------------------
+ --><h1>NgModel</h1>
+
+<!-- el data binding [(ngModel)] o tambien llamado two way data binding
+consiste en que trabaja el event binding() y el property binding[] a la misma vez
+esto depende de importar el paquete de FromsModule angular forms.
+haciendo notar que los [] recuperan la informacion del component.TS y las () editan o le dan
+un valor a la variable person.name del component.TS a travez de un evento, en esteca el evento (ngModel)
+en conclusion []los corchetes escuchan y ()los parentesis envian informacion
+------------------------------------------------------------------------------------------
+Tambien hacer notar que para declarar un variable en una etiqueta se usa #nombreVariable
+que ayuda a comunicar entre elementos o etiquetas en valor de esta variable se puede
+recuperar a travez de brackets o string interpolation.
+#nameInput="ngModel" esta caracteristica recupera los valores del elemento
+
+"required" es usado para hacer notar que ese input es requerido como formulario
+-->
+
+<p>Nombre: {{persona.name}}</p>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="persona.name">
+<p>Valid:{{nameInput.valid}}</p>
+
+<p>Age: {{persona.age}}</p>
+<input type="number" max="18" min="10" required #ageInput="ngModel" [(ngModel)]="persona.age">
+<p>Valid:{{ageInput.valid}}</p>
+
+
+<!-- --------------------------------------------------------------------------------------------- -->
+
+<hr>
 <h1>Eventos</h1>
 <button [disabled]="btnDisabled" >Enviar</button>
 prueba git asd
@@ -7,12 +97,23 @@ funciones declaradas en el component.ts a travez de un evento por ejemplo : <But
 <button (click)="toogleButton()" >Toogle Button</button>
 <p>Edad {{ persona.age }}</p>
 <button (click)="incrementarEdad()" >incrementar Edad</button>
+<!-- --------------------------------------------------------------------------------------------- -->
+Otros Eventos
+<!-- En este caso estamos usando el evento scroll en el cual enviamos como parametro $event
+dentro de la funcion onScroll el cual recupera todas las caracteristicas del elemento div -->
+<div class="box" (scroll)="onScroll($event)">
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quia, provident eveniet laborum perferendis deleniti quasi alias, illum nihil, iusto quae culpa? Dicta, repudiandae cumque? Quasi ratione cupiditate iusto iure. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur quisquam earum. Quam illum dolorem molestiae id impedit aliquam cupiditate, sapiente natus? Perspiciatis corrupti quod consequuntur quam porro a magnam.</p>
+</div>
 
-<hr>git remote add origin https://github.com/Felipeff666/prueba.git
-git branch -M main
-git push -u origin main
+Leyendo eventos de un input
+<br>
+<input type="text" [value]="persona.name" (keyup)="changeName($event)">
+<br>
+<p>Nombre: {{persona.name}}</p>
 
 
+<hr>
+<!-- --------------------------------------------------------------------------------------------- -->
 <h1>Propiedades</h1>
 <button >Enviar</button>
 <!--
@@ -27,6 +128,7 @@ Que consiste en usar Corchetes [] de la siguiente forma [atributo]="nombreVariab
 <br>
 <img [src]="img" alt="" width="100">
 
+
 <hr>
 Manipulando objetos
 <button [disabled]="btnDisabled" >Enviar</button>
@@ -38,6 +140,9 @@ Manipulando objetos
 <img [src]="persona.img" alt="" width="100">
 
 <hr>
+
+#seccion
+<!-- --------------------------------------------------------------------------------------------- -->
 <!-- Usando Brackets con string interpolation-->
 <h1>Hola Mundo</h1>
 <!-- dentro de los brackets puede entra codigo logico de JavaScript -->
