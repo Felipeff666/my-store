@@ -8,6 +8,20 @@ import { Product } from './Product.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  register = {
+    name:'',
+    email:'',
+    password:''
+  }
+
+  widthImg=10;
+  box = {
+    width: 100,
+    height:100,
+    background:'red'
+  }
+
   name = 'Felipe'; // por defecto se declara com publico
   age = 23;
   img = 'https://source.unsplash.com/random';
@@ -83,6 +97,10 @@ export class AppComponent {
   }
   eliminarNombre(index:number){
     this.nombres.splice(index,1)
+  }
+
+  onRegister(){
+    console.log(this.register)
   }
 
 }
